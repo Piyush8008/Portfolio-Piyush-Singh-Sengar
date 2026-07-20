@@ -1,0 +1,39 @@
+.loader-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #1B1B1B;
+}
+
+.loader-grid {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.loader-pixel {
+  width: 16px;
+  height: 16px;
+
+  background: #C8A96A;
+}
+
+.crt-flicker {
+  animation: flicker .15s linear;
+}
+
+@keyframes flicker {
+
+0%{opacity:1;}
+
+50%{opacity:.92;}
+
+100%{opacity:1;}
+
+}
