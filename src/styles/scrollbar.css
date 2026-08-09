@@ -1,19 +1,21 @@
-::-webkit-scrollbar{
-
-width:10px;
-
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-::-webkit-scrollbar-track{
-
-background:var(--color-surface);
-
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 999px;
+}
 
-background:var(--color-gold);
+::-webkit-scrollbar-thumb:hover {
+  background: #b99550;
+}
 
-border-radius:999px;
-
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold) var(--color-surface);
 }

@@ -1,7 +1,6 @@
-.cursor-dot{
-    position:fixed;
-}
-
-.cursor-ring{
-    position:fixed;
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
 }

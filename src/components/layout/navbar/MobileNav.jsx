@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 
@@ -16,6 +16,28 @@ function MobileNav({
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    if (!isOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
     <>
       {/* Mobile Navbar */}
@@ -24,57 +46,101 @@ function MobileNav({
 
         <button
           type="button"
-          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-label={
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="rounded-lg p-2 transition-colors duration-300"
-          style={{
-            color: "var(--color-charcoal)",
-          }}
+          className="
+            rounded-lg
+            p-2
+            text-[var(--color-charcoal)]
+            transition-colors
+            duration-300
+            hover:text-[var(--color-gold)]
+            focus:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[var(--color-gold)]
+          "
         >
           {isOpen ? (
-            <HiXMark size={28} />
+            <HiXMark size={28} aria-hidden="true" />
           ) : (
-            <HiBars3 size={28} />
+            <HiBars3 size={28} aria-hidden="true" />
           )}
         </button>
       </div>
 
-      {/* Overlay */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 lg:hidden"
+            className="
+              fixed
+              inset-0
+              z-[60]
+              lg:hidden
+            "
             style={{
               background: "rgba(248,245,239,0.98)",
               backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
             }}
           >
             <div className="flex h-full flex-col">
               {/* Header */}
-              <div className="flex items-center justify-between border-b px-6 py-6">
+              <div
+                className="
+                  flex
+                  items-center
+                  justify-between
+                  border-b
+                  border-[var(--color-border)]
+                  px-6
+                  py-6
+                "
+              >
                 <Logo />
 
                 <button
                   type="button"
-                  aria-label="Close menu"
+                  aria-label="Close navigation menu"
                   onClick={() => setIsOpen(false)}
-                  style={{
-                    color: "var(--color-charcoal)",
-                  }}
+                  className="
+                    rounded-lg
+                    p-2
+                    text-[var(--color-charcoal)]
+                    transition-colors
+                    duration-300
+                    hover:text-[var(--color-gold)]
+                    focus:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-[var(--color-gold)]
+                  "
                 >
-                  <HiXMark size={30} />
+                  <HiXMark size={30} aria-hidden="true" />
                 </button>
               </div>
 
               {/* Links */}
               <nav
                 aria-label="Mobile Navigation"
-                className="flex flex-1 flex-col justify-center gap-8 px-8"
+                className="
+                  flex
+                  flex-1
+                  flex-col
+                  justify-center
+                  gap-7
+                  overflow-y-auto
+                  px-8
+                  py-10
+                "
               >
                 {navigation.map((item) => (
                   <NavItem
@@ -88,7 +154,14 @@ function MobileNav({
               </nav>
 
               {/* Footer */}
-              <div className="border-t px-6 py-8">
+              <div
+                className="
+                  border-t
+                  border-[var(--color-border)]
+                  px-6
+                  py-8
+                "
+              >
                 <ResumeButton />
               </div>
             </div>

@@ -1,149 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700&display=swap");
+
 @import "tailwindcss";
 
-@import "./typography.css";
-@import "./utilities.css";
-@import "./scrollbar.css";
-@import "./cursor.css";
-@import "./loader.css";
-
-/* ==========================================
+/* ============================================
    DESIGN TOKENS
-========================================== */
+============================================ */
 
-:root{
+:root {
+  --color-background: #f8f5ef;
+  --color-surface: #f3efe8;
+  --color-charcoal: #1b1b1b;
+  --color-gold: #c8a96a;
+  --color-forest: #2d4b3a;
+  --color-muted: #666666;
+  --color-border: #ded5c8;
 
-  /* Colors */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
 
-  --color-background:#F8F5EF;
+  --shadow-soft: 0 8px 30px rgba(27, 27, 27, 0.08);
+  --shadow-hover: 0 16px 45px rgba(27, 27, 27, 0.14);
 
-  --color-surface:#FCFAF6;
-
-  --color-charcoal:#1B1B1B;
-
-  --color-gold:#C8A96A;
-
-  --color-forest:#2D4B3A;
-
-  --color-muted:#666666;
-
-  --color-border:#DED5C8;
-
-  /* Fonts */
-
-  --font-heading:"Playfair Display",serif;
-
-  --font-body:"Inter",sans-serif;
-
-  --font-mono:"JetBrains Mono",monospace;
-
-  /* Radius */
-
-  --radius-sm:12px;
-
-  --radius-md:18px;
-
-  --radius-lg:24px;
-
-  /* Shadows */
-
-  --shadow-soft:
-      0 10px 35px rgba(0,0,0,.06);
-
-  --shadow-hover:
-      0 16px 45px rgba(0,0,0,.08);
-
-  /* Transition */
-
-  --transition-fast:.25s ease;
-
-  --transition-normal:.35s ease;
-
+  --transition-fast: 180ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
 }
 
-/* ==========================================
-   RESET
-========================================== */
+/* ============================================
+   BASE
+============================================ */
 
-*,
-*::before,
-*::after{
-
-margin:0;
-
-padding:0;
-
-box-sizing:border-box;
-
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
-html{
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
 
-scroll-behavior:smooth;
+  background: var(--color-background);
+  color: var(--color-charcoal);
 
+  font-family: var(--font-body);
+  line-height: 1.7;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-body{
-
-background:var(--color-background);
-
-color:var(--color-charcoal);
-
-font-family:var(--font-body);
-
-overflow-x:hidden;
-
-line-height:1.75;
-
-text-rendering:optimizeLegibility;
-
--webkit-font-smoothing:antialiased;
-
+#root {
+  min-height: 100vh;
 }
 
-img{
+/* ============================================
+   TYPOGRAPHY
+============================================ */
 
-display:block;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 
-max-width:100%;
+  font-family: var(--font-heading);
+  font-weight: 700;
 
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
-button{
-
-border:none;
-
-background:none;
-
-font:inherit;
-
-cursor:pointer;
-
+p {
+  margin: 0;
 }
 
-a{
-
-text-decoration:none;
-
-color:inherit;
-
+code,
+pre {
+  font-family: var(--font-mono);
 }
 
-/*body::before{
+/* ============================================
+   LINKS
+============================================ */
 
-content:"";
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-position:fixed;
+/* ============================================
+   BUTTONS
+============================================ */
 
-inset:0;
+button {
+  margin: 0;
+  border: 0;
 
-pointer-events:none;
+  font: inherit;
+  cursor: pointer;
+}
 
-opacity:.025;
+/* ============================================
+   FORM ELEMENTS
+============================================ */
 
-background-image:url("../assets/textures/paper-texture.png");
+input,
+textarea,
+select {
+  font: inherit;
+}
 
-mix-blend-mode:multiply;
+/* ============================================
+   IMAGES
+============================================ */
 
-z-index:-1;
+img {
+  display: block;
+  max-width: 100%;
+}
 
-}*/
+/* ============================================
+   SELECTION
+============================================ */
+
+::selection {
+  background: var(--color-gold);
+  color: #ffffff;
+}
+
+/* ============================================
+   ACCESSIBILITY
+============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   SCROLLBAR
+============================================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b99550;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold) var(--color-surface);
+}
+
+/* ============================================
+   PAPER GRAIN
+============================================ */
+
+/*
+  The previous implementation referenced a texture
+  file that does not currently exist in the project.
+
+  Using a CSS-only grain keeps the effect lightweight
+  and removes a possible 404 request.
+*/
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  opacity: 0.025;
+
+  background-image:
+    radial-gradient(
+      rgba(27, 27, 27, 0.35) 0.5px,
+      transparent 0.5px
+    );
+
+  background-size: 4px 4px;
+
+  mix-blend-mode: multiply;
+}

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+
 import { scrollToSection } from "../../../utils/scrollToSection";
 
 function NavItem({
@@ -19,10 +20,12 @@ function NavItem({
     <button
       type="button"
       aria-label={`Navigate to ${label}`}
+      aria-current={active ? "page" : undefined}
       onClick={handleClick}
       className="
         group
         relative
+        w-fit
         px-2
         py-1
         text-sm
@@ -30,6 +33,10 @@ function NavItem({
         transition-colors
         duration-300
         focus:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[var(--color-gold)]
+        focus-visible:ring-offset-2
+        focus-visible:ring-offset-[var(--color-background)]
       "
       style={{
         color: active
@@ -37,13 +44,19 @@ function NavItem({
           : "var(--color-muted)",
       }}
     >
-      <span className="group-hover:text-heading">
+      <span className="transition-colors duration-300 group-hover:text-heading">
         {label}
       </span>
 
       <motion.span
         layoutId="active-navbar-item"
-        className="absolute -bottom-1 left-0 h-[2px] rounded-full"
+        className="
+          absolute
+          -bottom-1
+          left-0
+          h-[2px]
+          rounded-full
+        "
         style={{
           backgroundColor: "var(--color-gold)",
           width: active ? "100%" : "0%",
@@ -52,6 +65,7 @@ function NavItem({
           duration: 0.25,
           ease: "easeOut",
         }}
+        aria-hidden="true"
       />
     </button>
   );

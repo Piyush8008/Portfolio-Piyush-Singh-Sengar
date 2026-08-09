@@ -4,21 +4,29 @@ function useActiveSection() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const sections = document.querySelectorAll("section[id]");
+    const sections = Array.from(
+      document.querySelectorAll("section[id]")
+    );
 
     if (!sections.length) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              a.boundingClientRect.top -
+              b.boundingClientRect.top
+          );
 
-        if (visible) {
-          setActiveSection(visible.target.id);
+        if (visibleSections.length > 0) {
+          setActiveSection(visibleSections[0].target.id);
         }
       },
       {
-        threshold: 0.35,
-        rootMargin: "-80px 0px -40% 0px",
+        threshold: 0,
+        rootMargin: "-90px 0px -55% 0px",
       }
     );
 
