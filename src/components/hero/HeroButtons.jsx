@@ -13,7 +13,7 @@ const HeroButtons = () => {
           rounded-full
           border
           border-white/10
-          bg-[var(--color-charcoal)]
+          bg-[var(--color-forest)]
           px-8
           py-4
           text-sm

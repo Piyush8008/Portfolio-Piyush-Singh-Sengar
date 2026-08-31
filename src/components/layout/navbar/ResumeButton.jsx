@@ -9,8 +9,8 @@ function ResumeButton() {
         justify-center
         rounded-full
         border
-        border-[var(--color-charcoal)]
-        bg-[var(--color-charcoal)]
+        border-[var(--color-forest)]
+        bg-[var(--color-forest)]
         px-6
         py-2.5
         text-xs

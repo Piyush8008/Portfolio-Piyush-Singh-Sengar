@@ -60,8 +60,12 @@ const Certifications = () => {
             const Icon = certification.icon;
 
             return (
-              <motion.article
+              <motion.a
                 key={certification.title}
+                href={certification.credentialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${certification.title} credential on Credly`}
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -110,7 +114,7 @@ const Certifications = () => {
                 <p className="mt-6 max-w-lg text-sm leading-7 text-body">
                   {certification.description}
                 </p>
-              </motion.article>
+              </motion.a>
             );
           })}
         </div>
